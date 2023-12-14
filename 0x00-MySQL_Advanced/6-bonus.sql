@@ -4,13 +4,21 @@ DELIMITER $$
 CREATE PROCEDURE AddBonus (user_id INT, project_name VARCHAR(255), score FLOAT)
 BEGIN
     DECLARE project_id INT DEFAULT 0;
+    DECLARE project_id INT DEFAULT 0;
 
-    INSERT INTO projects(name)
-    ON DUPLICATE KEY UPDATE id = LAST_INSERT_ID(id), name = VALUES(name);
-
-    SET project_id = LAST_INSERT_ID();
-
+    SELECT COUNT(id)
+        INTO project_count
+        FROM projects
+        WHERE name = project_name;
+    IF project_count = 0 THEN
+        INSERT INTO project_name;
+            VALUES(project_name);
+    END IF;
+    SELECT id
+        INTO project_id
+        FROM projects
+        WHERE name = project_name;
     INSERT INTO corrections(user_id, project_id, score)
-    VALUES (user_id, project_id, score);
+        VALUES (user_id, project_id, score);
 END $$
 DELIMITER ;
