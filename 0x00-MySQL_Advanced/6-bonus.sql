@@ -3,7 +3,7 @@ DROP PROCEDURE IF EXISTS AddBonus;
 DELIMITER $$
 CREATE PROCEDURE AddBonus (user_id INT, project_name VARCHAR(255), score FLOAT)
 BEGIN
-    DECLARE project_id INT DEFAULT 0;
+    DECLARE project_count INT DEFAULT 0;
     DECLARE project_id INT DEFAULT 0;
 
     SELECT COUNT(id)
@@ -11,7 +11,7 @@ BEGIN
         FROM projects
         WHERE name = project_name;
     IF project_count = 0 THEN
-        INSERT INTO project_name;
+        INSERT INTO projects(name)
             VALUES(project_name);
     END IF;
     SELECT id
@@ -21,4 +21,4 @@ BEGIN
     INSERT INTO corrections(user_id, project_id, score)
         VALUES (user_id, project_id, score);
 END $$
-DELIMITER ;
+DELIMITER;
