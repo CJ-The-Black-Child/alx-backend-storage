@@ -29,9 +29,13 @@ def print_top_ips(nginx_collection):
         print("\t{}: {}".format(ip["_id"], ip["count"]))
 
 
-if __name__ == "__main__":
+def run():
     """Provides some stats about Nginx logs stored in MongoDB."""
     client = MongoClient('mongodb://127.0.0.1:27017')
     nginx_collection = client.logs.nginx
     print_nginx_request_logs(nginx_collection)
     print_top_ips(nginx_collection)
+
+
+if __name__ == "__main__":
+    run()
