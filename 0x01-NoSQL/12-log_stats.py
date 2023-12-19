@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-""" Module for task 12"""
-
-
+""" Module for task 12: MongoDb Ops with pymongo"""
 from pymongo import MongoClient
 
 
