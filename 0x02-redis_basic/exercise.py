@@ -107,4 +107,5 @@ def replay(method: Callable) -> None:
     outputs = redis_store.lrange(f"{method_name}:outputs", 0, -1)
     print(f"{method_name} was called {len(inputs)} times:")
     for inp, out in zip(inputs, outputs):
-        print(f"{method_name}{inp.decode('utf-8')} -> {out.decode('utf-8')}")
+        inp_tuple = eval(inp.decode('utf-8'))
+        print(f"{method_name}{inp_tuple} -> {out.decode('utf-8')}")

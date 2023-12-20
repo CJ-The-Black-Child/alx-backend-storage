@@ -16,7 +16,7 @@ def count_requests(method: Callable) -> Callable:
     Decorator for counting the number of requests made to a URL.
     """
     @wraps(method)
-    def wrapper(url: str) -> str:
+    def wrapper(url: str) -> bytes:
         """
         Wrapper for decorator. It checks if the HTML content of
         the URL is cached in Redis. If it is, it returns the cached
@@ -26,7 +26,7 @@ def count_requests(method: Callable) -> Callable:
         redis_.incr(f"count:{url}")
         cached_html = redis_.get(f"cached:{url}")
         if cached_html:
-            return cached_html.decode('utf-8')
+            return cached_html
         html = method(url)
         redis_.setex(f"cached:{url}", 10, html)
         return html
@@ -39,4 +39,4 @@ def get_page(url: str) -> str:
     Sends a request to a URL and returns the HTML content.
     """
     response = requests.get(url)
-    return response.text
+    return response.content.decode("utf-8")
